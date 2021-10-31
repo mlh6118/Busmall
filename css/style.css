@@ -10,7 +10,7 @@ body {
 header {
   font-family: 'Great Vibes', cursive;
   margin: 25px 0 0 25px;
-  position: relative;
+  /* position: relative; */
   text-align: center;
   align-items: center;
 }
@@ -26,7 +26,7 @@ header p:last-child{
 }
 
 main h1 {
-  position: relative;
+  /* position: relative; */
   margin: 25px;
   height: 25px;
   text-align: center;
@@ -35,15 +35,15 @@ main h1 {
 }
 
 main section {
-  position: relative;
+  /* position: relative; */
   margin: 25px 50px;
-  height: 300px;
+  /* height: 300px; */
   /* border: 1px solid black; */
   text-align: center;
 }
 
 main div {
-  position: relative;
+  /* position: relative; */
   margin: 25px 0;
   height: 35px;
   text-align: center;
@@ -54,8 +54,12 @@ main img {
 }
 
 main ul {
-  position: relative;
+  /* position: relative; */
   width: 400px;
   margin: 0px 100px;
   text-align: left;
 }
+
+/* main div:last-child {
+  position: relative;
+} */

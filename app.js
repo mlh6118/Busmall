@@ -2,6 +2,8 @@
 
 // Global variables.
 const results = document.querySelector('ul');
+const viewResults = document.querySelector('div');
+
 let productArray = [];
 let numberOfRoundsForSelections = 0;
 let img1 = document.querySelector('section img:first-child');
@@ -73,11 +75,14 @@ function handleClick(event) {
     }
   }
 
-  // Add one to the counter for the number of selection rounds.
-  numberOfRoundsForSelections++;
-
   // Change the images to select from.
   renderProducts();
+
+}
+
+function handleButton(event) {
+  // Add one to the counter for the number of selection rounds.
+  numberOfRoundsForSelections++;
 
   // Clear out each previous render.
   while(results.firstChild){
@@ -87,12 +92,13 @@ function handleClick(event) {
   // Render number of times product was selected.
   renderTimesShown();
 
-
 }
 
 img1.addEventListener('click', handleClick);
 img2.addEventListener('click', handleClick);
 img3.addEventListener('click', handleClick);
+
+viewResults.addEventListener('click', handleButton);
 
 renderProducts();
 // renderTimesShown();
