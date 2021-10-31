@@ -1,0 +1,61 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color:darkgoldenrod;
+  width: 960px;
+}
+
+header {
+  font-family: 'Great Vibes', cursive;
+  margin: 25px 0 0 25px;
+  position: relative;
+  text-align: center;
+  align-items: center;
+}
+
+header p:first-child{
+  font-size: 50px;
+  /* text-align: center; */
+}
+
+header p:last-child{
+  font-size: 30px;
+  /* text-align: center; */
+}
+
+main h1 {
+  position: relative;
+  margin: 25px;
+  height: 25px;
+  text-align: center;
+  /* border: 1px solid black; */
+  font-weight: bold;
+}
+
+main section {
+  position: relative;
+  margin: 25px 50px;
+  height: 300px;
+  /* border: 1px solid black; */
+  text-align: center;
+}
+
+main div {
+  position: relative;
+  margin: 25px 0;
+  height: 35px;
+  text-align: center;
+}
+
+main img {
+  width: 250px;
+}
+
+main ul {
+  position: relative;
+  width: 400px;
+  margin: 0px 100px;
+  text-align: left;
+}
