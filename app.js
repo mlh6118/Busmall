@@ -5,10 +5,11 @@ const results = document.querySelector('ul');
 const viewResults = document.querySelector('div');
 
 let productArray = [];
-let numberOfRoundsForSelections = 0;
+let numberOfRoundsForSelections = 3;
 let img1 = document.querySelector('section img:first-child');
 let img2 = document.querySelector('section img:nth-child(2)');
 let img3 = document.querySelector('section img:last-child');
+let currentSelectionRound = 0;
 
 // console.log(img1 + ' ' + img2 + ' ' + img3);
 
@@ -62,22 +63,26 @@ function renderTimesShown() {
 function handleClick(event) {
   // alert('You are in the handleClick event.');
 
-  // Declare variable to be assigned event.target.
-  let itemSelected = event.target;
+  if(currentSelectionRound < numberOfRoundsForSelections) {
 
-  // For a single selection round, add one to the count of the product selected.
-  for(let i = 0; i < productArray.length; i++){
-    // if itemSelect.src ends with same filename, do the addition to the timesSelected.
-    /* endsWith returns a boolean value.  Must do comparison to True instead of productArray[i].filePathOfImage.  If statement always checks if something is true.  No need to be redundant. */
-    // if(itemSelected.src.endsWith(productArray[i].filePathOfImage) === productArray[i].filePathOfImage){
-    if(itemSelected.src.endsWith(productArray[i].filePathOfImage)){
-      productArray[i].timesSelected++;
+    // Declare variable to be assigned event.target.
+    let itemSelected = event.target;
+
+    // For a single selection round, add one to the count of the product selected.
+    for(let i = 0; i < productArray.length; i++){
+      // if itemSelect.src ends with same filename, do the addition to the timesSelected.
+      /* endsWith returns a boolean value.  Must do comparison to True instead of productArray[i].filePathOfImage.  If statement always checks if something is true.  No need to be redundant. */
+      // if(itemSelected.src.endsWith(productArray[i].filePathOfImage) === productArray[i].filePathOfImage){
+      if(itemSelected.src.endsWith(productArray[i].filePathOfImage)){
+        productArray[i].timesSelected++;
+      }
     }
+
+    // Change the images to select from.
+    renderProducts();
   }
 
-  // Change the images to select from.
-  renderProducts();
-
+  currentSelectionRound++;
 }
 
 function handleButton(event) {
