@@ -73,6 +73,12 @@ function handleClick(event) {
     }
   }
 
+  // Add one to the counter for the number of selection rounds.
+  numberOfRoundsForSelections++;
+
+  // Change the images to select from.
+  renderProducts();
+
   // Clear out each previous render.
   while(results.firstChild){
     results.removeChild(results.firstChild);
