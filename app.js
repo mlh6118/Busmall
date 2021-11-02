@@ -2,16 +2,14 @@
 
 // Global variables.
 const results = document.querySelector('ul');
-const viewResults = document.querySelector('div');
+const viewResults = document.querySelector('button');
 
 let productArray = [];
-let numberOfRoundsForSelections = 3;
+let numberOfRoundsForSelections = 25;
 let img1 = document.querySelector('section img:first-child');
 let img2 = document.querySelector('section img:nth-child(2)');
 let img3 = document.querySelector('section img:last-child');
 let currentSelectionRound = 0;
-
-// console.log(img1 + ' ' + img2 + ' ' + img3);
 
 //Constructor function for products.
 function Product(productName, fileExtension = 'jpg') {
@@ -24,9 +22,24 @@ function Product(productName, fileExtension = 'jpg') {
 }
 
 new Product('bag');
-new Product('sweep', 'png');
+new Product('banana');
+new Product('bathroom');
+new Product('boots');
+new Product('breakfast');
+new Product('bubblegum');
+new Product('chair');
 new Product('cthulhu');
+new Product('dog-duck');
 new Product('dragon');
+new Product('pen');
+new Product('pet-sweep');
+new Product('scissors');
+new Product('shark');
+new Product('sweep', 'png');
+new Product('tauntaun');
+new Product('unicorn');
+new Product('water-can');
+new Product('wine-glass');
 
 function randomNumber() {
   return Math.floor(Math.random() * productArray.length); // only return the value, not a variable.
@@ -61,7 +74,6 @@ function renderTimesShown() {
 }
 
 function handleClick(event) {
-  // alert('You are in the handleClick event.');
 
   if(currentSelectionRound < numberOfRoundsForSelections) {
 
@@ -72,7 +84,6 @@ function handleClick(event) {
     for(let i = 0; i < productArray.length; i++){
       // if itemSelect.src ends with same filename, do the addition to the timesSelected.
       /* endsWith returns a boolean value.  Must do comparison to True instead of productArray[i].filePathOfImage.  If statement always checks if something is true.  No need to be redundant. */
-      // if(itemSelected.src.endsWith(productArray[i].filePathOfImage) === productArray[i].filePathOfImage){
       if(itemSelected.src.endsWith(productArray[i].filePathOfImage)){
         productArray[i].timesSelected++;
       }
@@ -106,4 +117,3 @@ img3.addEventListener('click', handleClick);
 viewResults.addEventListener('click', handleButton);
 
 renderProducts();
-// renderTimesShown();
