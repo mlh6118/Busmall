@@ -47,17 +47,20 @@ function randomNumber() {
 }
 
 function renderProducts() {
+
+  // Generate the initial set of random numbers.
   for(let i = 0; i < 3; i++) {
     let newNumber = randomNumber();
-    while(randomNumberArray.includes(newNumber)){
+    while(randomNumberArray.includes(newNumber)){  // Verify numbers are not already being used in set of numbers.
       newNumber = randomNumber();
     }
     randomNumberArray.push(newNumber);
   }
 
+  // Generate the replacement set of random numbers.
   while(randomNumberArray.length < 6) {
     let newSetNumber = randomNumber();
-    if(!randomNumberArray.includes(newSetNumber)){
+    if(!randomNumberArray.includes(newSetNumber)){  // Verify numbers are not part of previous set of numbers.
       randomNumberArray.push(newSetNumber);
     }
   }
@@ -70,6 +73,7 @@ function renderProducts() {
   productArray[randomNumberArray[1]].timesShown++;
   productArray[randomNumberArray[2]].timesShown++;
 
+  // Remove first three values of randomNumberArray to prepare for next set of numbers.
   for(let i = 0; i < 3; i++){
     randomNumberArray.shift();
   }
@@ -117,9 +121,57 @@ function handleButton(event) {
   }
 
   // Render number of times product was selected.
-  renderTimesShown();
-
+  // renderTimesShown();
+  chartTotalResults();
 }
+
+function chartTotalResults(){
+  let arrayOfProducts = [];
+  let arrayOfTimesShown = [];
+  let arrayOfTimesSelected = [];
+
+  // Put all data from productArray[] into chart data arrays.
+  for(let i = 0; i < productArray.length; i++){
+    arrayOfProducts.push(productArray[i].productName);
+    arrayOfTimesShown.push(productArray[i].timesShown);
+    arrayOfTimesSelected.push(productArray[i].timesSelected);
+  }
+
+  // Set up data for the chart.  Cannot use productArray[] directly here.
+  const data = {
+    labels: arrayOfProducts,
+    datasets: [
+      {
+        label: 'Viewed',
+        backgroundColor: 'rgb(150, 2, 2)',
+        borderColor: 'rgb(150, 2, 2)',
+        data: arrayOfTimesShown,
+      },
+      {
+        label: 'Selected',
+        backgroundColor: 'rgb(2, 83, 150)',
+        borderColor: 'rgb(2, 83, 150)',
+        data: arrayOfTimesSelected,
+      },
+    ]
+  };
+
+  const config = {
+    type: 'bar',
+    data: data,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  };
+
+  let resultsChart = document.getElementById('chartResults');
+  const chartResults = new Chart(resultsChart,config);
+}
+
 
 img1.addEventListener('click', handleClick);
 img2.addEventListener('click', handleClick);
