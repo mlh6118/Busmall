@@ -5,6 +5,7 @@ const results = document.querySelector('ul');
 const viewResults = document.querySelector('button');
 
 let productArray = [];
+let randomNumberArray = []; // Use to store the numbers to populate and check against.
 let numberOfRoundsForSelections = 25;
 let img1 = document.querySelector('section img:first-child');
 let img2 = document.querySelector('section img:nth-child(2)');
@@ -46,23 +47,33 @@ function randomNumber() {
 }
 
 function renderProducts() {
-  let product1 = randomNumber();
-  let product2 = randomNumber();
-  let product3 = randomNumber();
-
-  while (product1 === product2 || product1 === product3 || product2 === product3){
-    product1 = randomNumber();
-    product2 = randomNumber();
-    product3 = randomNumber();
+  for(let i = 0; i < 3; i++) {
+    let newNumber = randomNumber();
+    while(randomNumberArray.includes(newNumber)){
+      newNumber = randomNumber();
+    }
+    randomNumberArray.push(newNumber);
   }
 
-  img1.src = productArray[product1].filePathOfImage;
-  img2.src = productArray[product2].filePathOfImage;
-  img3.src = productArray[product3].filePathOfImage;
+  while(randomNumberArray.length < 6) {
+    let newSetNumber = randomNumber();
+    if(!randomNumberArray.includes(newSetNumber)){
+      randomNumberArray.push(newSetNumber);
+    }
+  }
 
-  productArray[product1].timesShown++;
-  productArray[product2].timesShown++;
-  productArray[product3].timesShown++;
+  img1.src = productArray[randomNumberArray[0]].filePathOfImage;
+  img2.src = productArray[randomNumberArray[1]].filePathOfImage;
+  img3.src = productArray[randomNumberArray[2]].filePathOfImage;
+
+  productArray[randomNumberArray[0]].timesShown++;
+  productArray[randomNumberArray[1]].timesShown++;
+  productArray[randomNumberArray[2]].timesShown++;
+
+  for(let i = 0; i < 3; i++){
+    randomNumberArray.shift();
+  }
+
 }
 
 function renderTimesShown() {
