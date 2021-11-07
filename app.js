@@ -2,7 +2,8 @@
 
 // Global variables.
 const results = document.querySelector('ul');
-const viewResults = document.querySelector('button');
+const viewResults = document.getElementById('viewResults');
+const clearData = document.getElementById('clearData');
 
 let productArray = [];
 let randomNumberArray = []; // Use to store the numbers to populate and check against.
@@ -13,34 +14,66 @@ let img3 = document.querySelector('section img:last-child');
 let currentSelectionRound = 0;
 
 //Constructor function for products.
-function Product(productName, fileExtension = 'jpg') {
+function Product(productName, fileExtension = 'jpg', timesShown = 0, timesSelected = 0) {
   this.productName = productName;
   this.filePathOfImage = `imgs/${productName}.${fileExtension}`;
-  this.timesShown = 0;
-  this.timesSelected = 0;
+  this.timesShown = timesShown;
+  this.timesSelected = timesSelected;
+  this.fileExtension = fileExtension;
 
   productArray.push(this);
 }
 
-new Product('bag');
-new Product('banana');
-new Product('bathroom');
-new Product('boots');
-new Product('breakfast');
-new Product('bubblegum');
-new Product('chair');
-new Product('cthulhu');
-new Product('dog-duck');
-new Product('dragon');
-new Product('pen');
-new Product('pet-sweep');
-new Product('scissors');
-new Product('shark');
-new Product('sweep', 'png');
-new Product('tauntaun');
-new Product('unicorn');
-new Product('water-can');
-new Product('wine-glass');
+// Store products in local storage.
+function storeProducts() {
+  let stringifiedProducts = JSON.stringify(productArray);
+  console.log(stringifiedProducts);
+  localStorage.setItem('product', stringifiedProducts);
+}
+
+// Get the existing product data, if there is any.
+function getProducts() {
+  let existingProduct = localStorage.getItem('product');
+
+  if (!existingProduct) {
+    new Product('bag');
+    new Product('banana');
+    new Product('bathroom');
+    new Product('boots');
+    new Product('breakfast');
+    new Product('bubblegum');
+    new Product('chair');
+    new Product('cthulhu');
+    new Product('dog-duck');
+    new Product('dragon');
+    new Product('pen');
+    new Product('pet-sweep');
+    new Product('scissors');
+    new Product('shark');
+    new Product('sweep', 'png');
+    new Product('tauntaun');
+    new Product('unicorn');
+    new Product('water-can');
+    new Product('wine-glass');
+    renderProducts();
+  }
+  else {
+    let parsedProducts = JSON.parse(existingProduct);
+    for (let product of parsedProducts){
+      let productName = product.productName;
+      // console.log('productName');
+      // let filePathOfImage = product.filePathOfImage;
+      // let filePathOfImage = product.`${fileExtension}`;
+      let fileExtension = product.fileExtension;
+      let timesShown = product.timesShown;
+      let timesSelected = product.timesSelected;
+      new Product(productName, fileExtension, timesShown, timesSelected);
+      // console.log(product);
+    }
+  }
+}
+
+getProducts();
 
 function randomNumber() {
   return Math.floor(Math.random() * productArray.length); // only return the value, not a variable.
@@ -111,13 +144,18 @@ function handleClick(event) {
   currentSelectionRound++;
 }
 
-function handleButton(event) {
+function handleClearDataButton() {
+  console.log('In the DataClear handler');
+  localStorage.removeItem('product');
+}
+
+function handleViewResultsButton() {
   // Add one to the counter for the number of selection rounds.
   numberOfRoundsForSelections++;
 
   // Clear out each previous render.
-  while(results.firstChild){
-    results.removeChild(results.firstChild);
+  while(viewResults.firstChild){
+    viewResults.removeChild(viewResults.firstChild);
   }
 
   // Render number of times product was selected.
@@ -170,6 +208,8 @@ function chartTotalResults(){
 
   let resultsChart = document.getElementById('chartResults');
   const chartResults = new Chart(resultsChart,config);
+  storeProducts();
+
 }
 
 
@@ -177,6 +217,7 @@ img1.addEventListener('click', handleClick);
 img2.addEventListener('click', handleClick);
 img3.addEventListener('click', handleClick);
 
-viewResults.addEventListener('click', handleButton);
+viewResults.addEventListener('click', handleViewResultsButton);
+clearData.addEventListener('click', handleClearDataButton);
 
 renderProducts();
