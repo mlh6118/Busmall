@@ -52,3 +52,16 @@ main ul {
 main div button {
   border-radius: 10px;
 }
+
+#clearData {
+  cursor: pointer;
+  background-color: pink;
+  pointer-events: auto;
+  z-index: 10;
+}
+
+#viewResults{
+  background-color: burlywood;
+  z-index: 10;
+  appearance: none;
+}
