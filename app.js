@@ -55,20 +55,15 @@ function getProducts() {
     new Product('unicorn');
     new Product('water-can');
     new Product('wine-glass');
-    renderProducts();
   }
   else {
     let parsedProducts = JSON.parse(existingProduct);
     for (let product of parsedProducts){
       let productName = product.productName;
-      // console.log('productName');
-      // let filePathOfImage = product.filePathOfImage;
-      // let filePathOfImage = product.`${fileExtension}`;
       let fileExtension = product.fileExtension;
       let timesShown = product.timesShown;
       let timesSelected = product.timesSelected;
       new Product(productName, fileExtension, timesShown, timesSelected);
-      // console.log(product);
     }
   }
 }
@@ -153,13 +148,7 @@ function handleViewResultsButton() {
   // Add one to the counter for the number of selection rounds.
   numberOfRoundsForSelections++;
 
-  // Clear out each previous render.
-  while(viewResults.firstChild){
-    viewResults.removeChild(viewResults.firstChild);
-  }
-
   // Render number of times product was selected.
-  // renderTimesShown();
   chartTotalResults();
 }
 
@@ -211,7 +200,6 @@ function chartTotalResults(){
   storeProducts();
 
 }
-
 
 img1.addEventListener('click', handleClick);
 img2.addEventListener('click', handleClick);

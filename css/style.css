@@ -41,6 +41,7 @@ main div {
 
 main img {
   width: 250px;
+  height: 250px;
 }
 
 main ul {
@@ -64,4 +65,8 @@ main div button {
   background-color: burlywood;
   z-index: 10;
   appearance: none;
+}
+
+.chartResults {
+  align-content: center;
 }
